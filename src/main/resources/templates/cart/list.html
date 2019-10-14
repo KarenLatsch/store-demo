@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Cart Detail List</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+    <br>
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3><b>My Cart Items</b></h3>
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-sm-offset-10">
+                <div th:if="${session.loggedInCustomer != null and customerCartQty != 0}">
+                    <form method="post" th:action="@{'/cart/emptycart/' + ${session.loggedInCustomerId}}">
+                        <input type="submit" class="btn btn-primary" value="Clear My Cart"></form>
+                    <br> <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(cartDetails)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Amount</th>
+
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="cartDetail: ${cartDetails}">
+                <td><img th:src="@{'/images/' +${cartDetail.imageUrl}}" class="small-image"/></img></td>
+                <td th:text="${cartDetail.name}"></td>
+                <td th:text="${cartDetail.description}"></td>
+                <td th:text="${cartDetail.price}"></td>
+                <td th:text="${cartDetail.quantity}"></td>
+                <td th:text="${cartDetail.totalAmount}"></td>
+                <td><a th:href="${'/cart/edit/' + cartDetail.id}">Edit</a></td>
+                <td>
+                    <form method="post" th:action="@{'/cart/delete/' + ${cartDetail.id}}">
+                        <input type="submit" value="Remove" th:style="button" class="button">
+                    </form>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="row"></div>
+        <div class="col-md-6">
+            <div class="col-md-offset-12">
+                <label>Total Amount:</label>
+            </div>
+        </Div>
+        <div class="col-md-6">
+            <div class="col-md-offset-7">
+                <output class="form-control-static" th:text="${cartTotalAmount}">Cart Total</output>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

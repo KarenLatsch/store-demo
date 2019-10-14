@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          media="screen"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link media="screen" rel="stylesheet" th:href="@{/css/custom.css}"/>
+
+    <title>My Storefront - View Account</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+    <br/>
+
+<div class="row">
+    <div class="col-md-12">
+
+    <div class="row">
+        <div class="col-md-2">
+
+    <div class="box">
+        <div class="col-md-2">
+            <h4><a th:href="@{'/customer/edit/' + ${session.loggedInCustomerId}}">Customer Information</a></h4>
+            <br>
+            <br>
+            <h4><a th:href="@{'/change_password/customer'}">Change Password</a></h4>
+            <br>
+            <br>
+            <h4><a th:href="@{'/creditcard/list/' + ${session.loggedInCustomerId}}">Credit Cards</a></h4>
+        </div>
+    </div>
+
+       </div>
+
+        <div class="col-md-10">
+<div class="box">
+    <div class="customerheader"><h3><b>My Order History</b></h3></div>
+        <br>
+    <div th:if="${not #lists.isEmpty(orders)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Ship To</th>
+                <th>Order Total</th>
+                <th>Order Status</th>
+                <th>Show</th>
+            </tr>
+            <tr th:each="order : ${orders}">
+                <ol>
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.dateOrdered}"></td>
+                    <td th:text="${order.firstName + ' ' + order.lastName}"></td>
+                    <td th:text="${order.totalAmount}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                    <td><a th:href="${'/storefront/vieworderdetail/' + order.id}">View Order</a> </td>
+                </ol>
+            </tr>
+
+        </table>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+</div>
+</div>
+
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

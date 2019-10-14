@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          media="screen"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link media="screen" rel="stylesheet" th:href="@{/css/custom.css}"/>
+
+    <title>My Storefront - View Product</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+
+    <br/>
+    <form method="post" th:action="@{'/cart/add_product_to_cart/' + ${product.id}}" th:object="${buyproductform}">
+
+                    <div class="row">
+                    <div class="col-md-12">
+                        <h2><p class="form-control-static" th:text="${product.name}">Name</p></h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="center-block"
+                             role="presentation"
+                             th:src="@{'/images/' +${product.imageUrl}}"/></img>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div>
+                            <h3><p class="form-control-static" th:text="${product.description}">Description</p></h3>
+
+                            <p>Adipiscing magna vestibulum fringilla tristique ad a primis ante mi inceptos condimentum curabitur
+                                curabitur eu sed nullam ridiculus nunc montes id nostra dui inceptos scelerisque posuere ipsum mus.
+                                A scelerisque libero viverra eu condimentum mollis suscipit mi consectetur semper dis ipsum nisi
+                                in nullam aliquet iaculis in eros euismod bibendum. Adipiscing volutpat fringilla bibendum duis a
+                                maecenas eu lorem accumsan fames sem faucibus ad mauris aliquam nam. Torquent amet adipiscing fusce
+                                fringilla venenatis tristique scelerisque natoque malesuada nostra duis nam augue ridiculus
+                                pulvinar ultrices laoreet in condimentum justo id. Nascetur condimentum maecenas magna metus curae
+                                est odio ad dui fames quam a aenean consequat faucibus nostra lorem adipiscing vestibulum
+                                ullamcorper etiam consectetur. </p>
+
+                            <p class="form-control-static" th:text="${product.price}">Price</p>
+                            <br>
+                            <div th:if="${session.loggedInCustomer != null}">
+                            <input class="form-control" id="quantity" name="quantity" required="required" th:min="1" th:value="*{quantity}" type="number"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-offset-6 col-md-4">
+                        <div th:if="${session.loggedInCustomer != null}">
+                            <button class="btn btn-success" type="submit"/>Add to Cart!</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+
+<div class="storefrontheader" th:fragment="storefrontheader">
+    <div class="container">
+        <br>
+        <form th:object="${cart}">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <h2><b>Welcome to My Storefront!</b></h2>
+                        <h4><p th:if="${session.loggedInCustomer != null}"
+                               th:text="'Greetings, ' + (${session.loggedInCustomer})"></p></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-offset-8">
+                            <a th:if="${session.loggedInCustomer != null}" href="cartdetailform.html"
+                               th:href="@{'/cart/list/' + ${session.loggedInCustomerCartId}}">
+                                <img src="../static/images/newcart.JPG"
+                                     th:src="@{/images/newcart.JPG}"/></img>
+                                <b>
+                                    <p th:if="${session.loggedInCustomer != null and customerCartQty != 0 and customerCartQty != null}"
+                                       th:text="(${customerCartQty}) + ' Items in cart'"></p></b>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer == null}" href="/login/customer">Login</a></b></h4>
+                </div>
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer == null}"
+                              href="/storefront/listproducts">Products</a></b></h4>
+                </div>
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer == null}" href="/customer/new">Register to Buy!</a></b>
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer != null}" href="/logout/customer">Logout</a></b></h4>
+                </div>
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer != null}"
+                              th:href="@{'/storefront/listproducts/' + ${session.loggedInCustomerId}}">Go Shop</a></b>
+                    </h4>
+                </div>
+                <div class="col-md-3">
+                    <h4><b><a th:if="${session.loggedInCustomer != null}"
+                              th:href="@{'/storefront/viewaccount/' + ${session.loggedInCustomerId}}">My Account</a></b>
+                    </h4>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-offset-3">
+                        <div th:if="${session.loggedInCustomer != null and customerCartQty != 0 and customerCartQty != null}">
+                            <a class="btn btn-success" role="button"
+                               th:href="@{'/checkout/' + ${session.loggedInCustomerId}}">Checkout Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

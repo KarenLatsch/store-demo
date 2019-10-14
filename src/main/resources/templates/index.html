@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Demo</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+
+<div class="container">
+    <h3><b>Welcome to MyStorefront Demo!</b></h3>
+    <title th:text="#{index.page.title}">Text message"</title>
+    <ul>
+        <br>
+        <br>
+        <h4><b>Testing Purposes </b></h4>
+        <li><a href="product/list">Products</a></li>
+        <li><a href="order/list">Orders</a></li>
+        <li><a href="employee/list">Employee</a></li>
+        <br>
+        <br>
+        <h4><b>Company's Workplace </b></h4>
+        <li><a href="/login">Employee Login</a></li>
+        <br>
+        <br>
+        <h4><b>Customer's Storefront </b></h4>
+        <li><a href="/storefront/listproducts">MyStoreFront</a></li>
+        <br>
+    </ul>
+</div>
+</body>
+</html>

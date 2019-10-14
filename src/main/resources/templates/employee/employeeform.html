@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Employee</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<div class="container">
+    <br>
+    <form class="form-horizontal" th:object="${employee}" th:action="@{/employee/edit}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <P th:if="${employeeError != null}" th:class="error" th:text="${employeeError}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">First Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{firstName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{lastName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+                <input required="required" type="email"
+                       placeholder="username@emailprovider.com"
+                       class="form-control" th:field="*{email}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Phone:</label>
+            <div class="col-sm-10">
+                <input required="required" type="text" class="form-control" th:field="*{phoneNumber}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 1:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{address.addressLine1}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{address.addressLine2}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">City:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{address.city}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">State:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="2" type="text" class="form-control"
+                       th:field="*{address.state}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Zip Code:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="5" th:maxlength="10" type="text" class="form-control"
+                       th:field="*{address.zipCode}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" th:for="roleType">Employee Role</label>
+            <div class="col-sm-10">
+                <select th:field="*{roleType}">
+                    <option th:each="roleType : ${roleTypes}"
+                            th:text="${roleType.name}"
+                            th:value="${roleType}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Username:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="4" th:maxlength="25" type="text" class="form-control"
+                       th:field="*{username}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password enabled:</label>
+            <div class="col-sm-10">
+                <select class="form-control" th:field="*{enabled}">
+                    <option th:value="true" data-th-field="*{enabled}">true</option>
+                    <option th:value="false" data-th-field="*{enabled}">false</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password:</label>
+            <div class="col-sm-10">
+                <input th:minlength="4" th:maxlength="25" type="password" class="form-control" th:field="*{password}"/>
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Confirm Password:</label>
+                <div class="col-sm-10">
+                    <input th:minlength="4" th:maxlength="25" type="password" class="form-control"
+                           th:field="*{confirmPassword}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="col-sm-offset-4">
+                            <button type="submit" class="btn btn-primary">Update Information</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<br>
+<div class="companyfooter" th:replace="fragments/companyfooter :: companyfooter"></div>
+</body>
+</html>

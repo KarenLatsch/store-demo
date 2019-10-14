@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - List Employees</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<div class="container">
+    <br>
+
+    <div th:if="${not #lists.isEmpty(employees)}">
+        <table class="table table-striped">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td><a th:href="${'/employee/show/' + employee.id}">View</a></td>
+                <td><a th:href="${'/employee/edit/' + employee.id}">Edit</a></td>
+                <td>
+                    <form method="post" th:action="@{'/employee/delete/' + ${employee.id}}">
+                        <input type="submit" value="Delete" th:style="button" class="button">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/employee/new">New Employee</a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<br>
+<div class="companyfooter" th:replace="fragments/companyfooter :: companyfooter"></div>
+</body>
+</html>

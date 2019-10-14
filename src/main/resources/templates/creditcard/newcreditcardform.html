@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Add Credit Card</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+    <form class="form-horizontal" th:object="${creditCard}" th:action="@{/creditcard/edit}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">
+                <h3><b>Cardholder Information</b></h3>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <P th:if="${creditCardError != null}" th:class="error" th:text="${creditCardError}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">First Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{firstName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{lastName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">
+                <h3><b>Billing Address</b></h3>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Billing Address Line 1:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{billingAddress.addressLine1}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Billing Address Line 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="*{billingAddress.addressLine2}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Billing City:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{billingAddress.city}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Billing State:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="*{billingAddress.state}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Billing Zip Code:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="5" th:maxlength="10" type="text" class="form-control"
+                       th:field="*{billingAddress.zipCode}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">
+                <h3><b>Payment Information</b></h3>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" th:for="creditCardType">Credit Card Type:</label>
+            <div class="col-sm-10">
+                <select th:field="*{creditCardType}">
+                    <option th:each="creditCardType : ${creditCardTypes}"
+                            th:text="${creditCardType.name}"
+                            th:value="${creditCardType}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Card Number:</label>
+            <div class="col-sm-10">
+                <input required="required" placeholder="1234567890123456" pattern="[0-9]{16}" type="text"
+                       class="form-control" th:field="*{cardNumber}" th:value="*{cardNumber}"
+                       th:placeholder="*{displayCardNumber}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Expiration Month:</label>
+            <div class="col-sm-10">
+                <input required="required" placeholder="12" pattern="[0-9]{2}" type="text" class="form-control"
+                       th:field="*{expirationMonth}" th:placeholder="*{displayExpMonth}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Expiration Year:</label>
+            <div class="col-sm-10">
+                <input required="required" placeholder="2025" pattern="[0-9]{4}" type="text" class="form-control"
+                       th:field="*{expirationYear}" th:placeholder="*{displayExpYear}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Verification Code:</label>
+            <div class="col-sm-10">
+                <input required="required" placeholder="123" pattern="[0-9]{3}" type="text" class="form-control"
+                       th:field="*{verificationCode}" th:placeholder="*{displayVerificationCode}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-sm-offset-2">
+                    <button type="submit" class="btn btn-success">Update Credit Card</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Logon Screen</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<main class="container">
+    <br>
+    <br>
+    <form class="login" th:action="@{/login/customer}" th:object="${loginForm}" method="post">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-offset-3">
+                    <p th:if="${invalidCredentials}" class="error"> Username or Password is incorrect</p>
+                    <dl>
+                        <dt><label for="username">Username</label></dt>
+                        <dd><input type="text" id="username" name="username" autofocus="autofocus"/></dd>
+                        <br>
+                        <dt><label for="password">Password</label></dt>
+                        <dd><input type="password" id="password" name="password"/></dd>
+                        <div class="col-md-offset-4">
+                            <dd>
+                                <button type="submit" class="btn btn-primary" value="Login"/>
+                                Login</button></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

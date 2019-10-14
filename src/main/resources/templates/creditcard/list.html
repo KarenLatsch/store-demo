@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Credit Card List</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+
+    <div th:if="${not #lists.isEmpty(creditcards)}">
+        <h2>Customer Credit Card List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Credit Card Type</th>
+                <th>Credit Card Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="creditcard : ${creditcards}">
+                <td th:text="${creditcard.firstName + ' ' + creditcard.lastName}"></td>
+                <td th:text="${creditcard.displayCardNumber}"></td>
+                <td><a th:href="${'/creditcard/edit/' + creditcard.id}">Edit</a></td>
+                <td>
+                    <form method="post" th:action="@{'/creditcard/delete/' + ${creditcard.id}}">
+                        <input type="submit" value="Delete" th:style="button" class="button">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a th:href="${'/creditcard/new'}">Add Credit Card</a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

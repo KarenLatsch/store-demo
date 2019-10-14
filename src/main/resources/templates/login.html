@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          media="screen"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link media="screen" rel="stylesheet" th:href="@{/css/custom.css}"/>
+
+    <title>Logon Screen</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<main class="container">
+
+    <form class="login" method="post" th:action="@{/login}" th:object="${loginForm}">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="col-md-offset-3">
+                    <p class="error" th:if="${invalidCredentials}">Username or Password is incorrect</p>
+                    <p class="error" th:if="${loginDisabled}">Your Login has been disabled, please contact your Administrator.</p>
+                    <dl>
+                        <dt><label for="username">Username</label></dt>
+                        <dd><input autofocus="autofocus"  id="username" name="username" type="text"/></dd>
+                        </br>
+                        <dt><label for="password">Password</label></dt>
+                        <dd><input id="password"  name="password" type="password" /></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-offset-6">
+                      <button class="btn btn-primary" type="submit" value="Login"/>Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Customer Checkout</title>
+</head>
+
+<body>
+<div class="jumbotron2" th:replace="fragments/jumbotron2 :: jumbotron2"></div>
+<div class="storefrontheader" th:replace="fragments/storefrontheader :: storefrontheader"></div>
+
+<div class="container">
+    <br>
+    <h3><b>Place Order</b></h3>
+
+    <form class="form-horizontal" th:object="${creditcardform}" th:action="@{'/checkout/' + ${customerId}}"
+          method="post">
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <P th:if="${creditCardError != null}" th:class="error" th:text="${creditCardError}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">First Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="${customer.firstName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="${customer.lastName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email:</label>
+            <div class="col-sm-10">
+                <input required="required" type="email"
+                       placeholder="username@emailprovider.com"
+                       class="form-control" th:field="${customer.email}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Phone:</label>
+            <div class="col-sm-10">
+                <input required="required" type="text" class="form-control" th:field="${customer.phoneNumber}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping Address Line 1:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="${customer.shippingAddress.addressLine1}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping Address Line 2:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" th:field="${customer.shippingAddress.addressLine2}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping City:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="${customer.shippingAddress.city}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping State:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control"
+                       th:field="${customer.shippingAddress.state}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Shipping Zip Code:</label>
+            <div class="col-sm-10">
+                <input required="required" th:minlength="5" th:maxlength="10" type="text" class="form-control"
+                       th:field="${customer.shippingAddress.zipCode}"/>
+            </div>
+        </div>
+
+        <div class="form-group" th:if="${creditCard.id != null}">
+            <label class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static" th:text="${creditCard.creditCardType}">Name</p>
+            </div>
+        </div>
+
+        <div class="form-group" th:if="${creditCard.id == null}">
+            <label class="col-sm-2 control-label" th:for="creditCardType">Credit Card Type:</label>
+            <div class="col-sm-10">
+                <select th:field="*{creditCardType}">
+                    <option th:each="creditCardType : ${creditCardTypes}"
+                            th:text="${creditCardType.name}"
+                            th:value="${creditCardType}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Card Number:</label>
+            <div class="col-sm-10">
+                <input required="required" minlength="16" maxlength="16" type="text" class="form-control"
+                       th:field="${creditCard.displayCardNumber}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Expiration Month:</label>
+            <div class="col-sm-10">
+                <input required="required" minlength="2" maxlength="2" type="text" class="form-control"
+                       th:field="${creditCard.displayExpMonth}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Expiration Year:</label>
+            <div class="col-sm-10">
+                <input required="required" minlength="4" maxlength="4" type="text" class="form-control"
+                       th:field="${creditCard.displayExpYear}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Verification Code:</label>
+            <div class="col-sm-10">
+                <input required="required" minlength="3" maxlength="3" type="text" class="form-control"
+                       th:field="${creditCard.displayVerificationCode}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="col-sm-offset-3">
+                    <button type="submit" class="btn btn-success">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<br>
+<div class="storefrontfooter" th:replace="fragments/storefrontfooter :: storefrontfooter"></div>
+</body>
+</html>

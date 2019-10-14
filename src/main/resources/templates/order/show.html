@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Show Order Detail</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<div class="container">
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Customer:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.lastName + ', ' + order.firstName}">Customer</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.email}">Email</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Phone Number:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.phoneNumber}">Phone Number</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Order Number:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.id}">Order Number</p>
+                    </div>
+                    <label class="col-sm-2 sm-2 control-label">Order Status:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.orderStatus}">Order Status</p>
+                    </div>
+                    <label class="col-sm-2 sm-2 control-label">Credit Card Detail:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.displayCardNumber}">Credit Card Detail</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Order Date:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.dateOrdered}">Order Date</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Shipped Date:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.dateShipped}">Shipped Date</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Total Amount:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.totalAmount}">Total Amount</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <h4>Shipped to Address</h4>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Address 1:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.shipToAddress.addressLine1}">Address Line 1</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Address 2:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.shipToAddress.addressLine2}">Address Line 1</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">City:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.shipToAddress.city}">City</p>
+                    </div>
+                    <label class="col-sm-2 control-label">State:</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.shipToAddress.state}">State</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Zip Code</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static" th:text="${order.shipToAddress.zipCode}">Zip Code</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Order Details</h4>
+                    <br>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="orderDetail : ${order.orderDetails}">
+                    <span th:if="${orderDetail.quantity != 0}">
+                    <td th:text="${orderDetail.name}">Product Name</td>
+                    <td th:text="${orderDetail.description}">Description</td>
+                    <td th:text="${orderDetail.price}">Price</td>
+                    <td th:text="${orderDetail.quantity}">Quantity</td>
+                    <td th:text="${orderDetail.totalAmount}">Total Amount</td>
+                    </span>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="companyfooter" th:replace="fragments/companyfooter :: companyfooter"></div>
+</body>
+</html>

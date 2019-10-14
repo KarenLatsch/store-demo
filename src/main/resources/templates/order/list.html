@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - List Orders</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<form class="container">
+    <br/>
+
+    <input type="text" name="customerSearch" placeholer="Enter Customer's Last Name">
+    <button type="submit" class="btn btn-primary" value="/order/findOrder"/>
+    Find Customer</button>
+    <button type="submit" class="btn btn-primary" value="/order/findOrder"/>
+    Refresh List</button>
+
+    <div th:if="${not #lists.isEmpty(orders)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Customer Name</th>
+                <th></th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Order Number</th>
+                <th>Order Status</th>
+                <th>Order Date</th>
+                <th>Shipped Date</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="order : ${orders}">
+                <ol>
+                    <td th:text="${order.lastName}"></td>
+                    <td th:text="${order.firstName}"></td>
+                    <td th:text="${order.email}"></td>
+                    <td th:text="${order.phoneNumber}"></td>
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                    <td th:text="${order.dateOrdered}"></td>
+                    <td th:text="${order.dateShipped}"></td>
+                    <td><a th:href="${'/order/show/' + order.id}">View</a></td>
+                    <td><a th:href="${'/order/edit/' + order.id}">Edit</a></td>
+                </ol>
+            </tr>
+        </table>
+    </div>
+    </div>
+</form>
+<br>
+<div class="companyfooter" th:replace="fragments/companyfooter :: companyfooter"></div>
+</body>
+</html>

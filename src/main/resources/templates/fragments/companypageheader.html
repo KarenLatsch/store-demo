@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+<div class="companypageheader" th:fragment="companypageheader">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 Class="companypageheader" th:text="${genericHeader}"></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h4><b>User Logged In</b></h4>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-offset-8">
+                    <h5>
+                        <script> document.write(new Date().toLocaleDateString()); </script>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h4><p th:utext="(${session.loggedInUser})"></p></h4>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-offset-8">
+                    <h5>
+                        <script> document.write(new Date().toLocaleTimeString().toString()); </script>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

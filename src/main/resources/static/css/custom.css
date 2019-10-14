@@ -1,0 +1,101 @@
+.error-message {
+    width: 100%;
+    color: #911;
+    margin-left: 30%;
+}
+dd,
+dt {
+    display: inline-block;
+}
+dd {
+    width: 70%;
+}
+dt {
+    width: 29%;
+    text-align: right;
+    padding: 0 15px 10px 0;
+}
+.jumbotron {
+    background: url('../images/gradient1.jpg') no-repeat center center;
+    font-family: "Cambria Math";
+    text-align: center;
+    height: 180px;
+    color: white;
+    text-shadow: #444 0 22px 22px;
+}
+
+.jumbotron2 {
+    background: url('../images/colorful-background-26.jpg') no-repeat center center;
+    font-family: "Cambria Math";
+    text-align: center;
+    height: 150px;
+    color: darkblue;
+    text-shadow: #444 0 22px 22px;
+}
+
+.jumbotron3 {
+    background: -moz-default-background-color;
+    font-family: "Cambria Math";
+    text-align: center;
+    height: 150px;
+    color: darkblue;
+    text-shadow: #444 0 22px 22px;
+}
+.storefront_background {
+    -moz-background-size: auto;
+}
+
+.companypageheader {
+    text-align: center;
+}
+.customerheader {
+    text-align: center;
+
+}
+.customerCheckout {
+    text-align: center;
+    mso-text-animation: sparkle;
+
+}
+.button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.box{
+    size: portrait;
+    background-color: lavender;
+    border-color: lightsteelblue;
+}
+
+.cart {
+    width:5%; height:5%;
+}
+
+.h4{
+    solid-color: sandybrown;
+}
+
+.small-image{
+    display:block;
+    width:15%; height:15%;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error {
+    width: 100%;
+    color: #911;
+    background-color: lightgray;
+    font-weight:bold;
+    font-max-size: large;
+    text-align: center;
+    padding: 15px 15px 15px 15px;
+}

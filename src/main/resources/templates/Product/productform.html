@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Update Product</title>
+</head>
+
+<body>
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron"></div>
+<div class="companypageheader" th:replace="fragments/companypageheader :: companypageheader"></div>
+
+<div class="container">
+    <br/>
+       <div>
+        <form class="form-horizontal" th:object="${product}" th:action="@{/product/edit}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-offset-2">
+                        <div th:if="${product.imageUrl != null}">
+                            <img th:src="@{'/images/' +${product.imageUrl}}"
+                                 class="small-image"/></img>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                         <P th:if="${productStatusError != null}" th:class="error" th:text="${productStatusError}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${product.name}">Name</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Description:</label>
+                <div class="col-sm-10">
+                    <input required="required" th:minlength="2" th:maxlength="50" type="text" class="form-control" th:field="*{description}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Price:</label>
+                <div class="col-sm-10">
+                    <input required="required" type="number" step='0.01' th:min="1.00" th:max="99999.99" class="form-control" th:field="*{price}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Image Url:</label>
+                <div class="col-sm-10">
+                    <input required="required" type="text" class="form-control" th:field="*{imageUrl}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" th:for="productStatus">Product Status</label>
+                <div class="col-sm-10">
+                    <select th:field="*{productStatus}">
+                        <option th:each="productStatus : ${productStatuses}"
+                                th:text="${productStatus.name}"
+                                th:value="${productStatus}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">On Hand Qty:</label>
+                <div class="col-sm-10">
+                    <input required="required" type="number" th:min="0" class="form-control" th:field="*{onHand}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 sm-2 control-label">Allocated:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${product.allocated}">Allocated</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 sm-2 control-label">Available:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${product.available}">Available</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="col-sm-offset-4">
+                            <button type="submit" class="btn btn-primary">Update Information</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="companyfooter" th:replace="fragments/companyfooter :: companyfooter"></div>
+</body>
+</html>
