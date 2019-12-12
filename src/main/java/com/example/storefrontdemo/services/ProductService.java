@@ -19,5 +19,7 @@ public interface ProductService extends CRUDService<Product> {
     void updateProductQtyForNewOrder(Order order);
 
     void updateProductQtyForShippedOrder(Order savedOrder);
+
+    void updateProductQtyForCancelledOrder(Order savedOrder);
 }
 

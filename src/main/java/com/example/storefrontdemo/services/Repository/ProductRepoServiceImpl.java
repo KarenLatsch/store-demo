@@ -117,7 +117,7 @@ public class ProductRepoServiceImpl implements ProductService {
 
             orderDetails.get(i).getProduct().setAllocated(newAllocatedQty);
             orderDetails.get(i).getProduct().setAvailable(newAvailableQty);
-            Product savedProduct = productService.saveOrUpdate(orderDetails.get(i).getProduct());
+            productService.saveOrUpdate(orderDetails.get(i).getProduct());
         }
     }
 
@@ -133,7 +133,23 @@ public class ProductRepoServiceImpl implements ProductService {
             orderDetails.get(i).getProduct().setAllocated(newAllocatedQty);
             orderDetails.get(i).getProduct().setOnHand(newOnHandQty);
             orderDetails.get(i).getProduct().setAvailable(newAvailableQty);
-            Product savedProduct = productService.saveOrUpdate(orderDetails.get(i).getProduct());
+            productService.saveOrUpdate(orderDetails.get(i).getProduct());
+        }
+    }
+
+    @Override
+    public void updateProductQtyForCancelledOrder(Order savedOrder) {
+        List<OrderDetail> orderDetails = orderDetailService.findByOrderId(savedOrder.getId());
+        for (int i = 0; i < orderDetails.size(); i++) {
+
+            Integer orderQty = orderDetails.get(i).getQuantity();
+            Integer newAllocatedQty = orderDetails.get(i).getProduct().getAllocated() - orderQty;
+            Integer onHandQty = orderDetails.get(i).getProduct().getOnHand();
+            Integer newAvailableQty = onHandQty - newAllocatedQty;
+
+            orderDetails.get(i).getProduct().setAllocated(newAllocatedQty);
+            orderDetails.get(i).getProduct().setAvailable(newAvailableQty);
+            productService.saveOrUpdate(orderDetails.get(i).getProduct());
         }
     }
 

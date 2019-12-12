@@ -95,7 +95,7 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
                 orderDetail.setName(product.getName());
                 orderDetail.setDescription(product.getDescription());
                 orderDetail.setPrice(product.getPrice());
-                orderDetail.setQuantity(1);
+                orderDetail.setQuantity(3);
 
 //  add that orderDetail to the Order
                 order.addToOrderDetails(orderDetail);
@@ -185,9 +185,7 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
                 order.addToOrderDetails(orderDetail);
             });
             Order savedOrder= orderService.saveOrUpdate(order);
-            if(savedOrder.getOrderStatus() == OrderStatus.SHIPPED){
-                productService.updateProductQtyForShippedOrder(savedOrder);
-            }
+
         });
     }
 

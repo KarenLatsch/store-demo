@@ -117,6 +117,11 @@ public class OrderController {
         if(savedOrder.getOrderStatus() == OrderStatus.SHIPPED){
             productService.updateProductQtyForShippedOrder(savedOrder);
         }
+
+        if(savedOrder.getOrderStatus() == OrderStatus.CANCELLED){
+            productService.updateProductQtyForCancelledOrder(savedOrder);
+        }
+
         return "redirect:/order/show/" + savedOrder.getId();
     }
 }
