@@ -87,6 +87,10 @@ public class CreditCardRepoServiceImpl implements CreditCardService {
         Calendar calendar = new GregorianCalendar();
         String year =  Integer.toString(calendar.get(Calendar.YEAR));
         String month =  Integer.toString(calendar.get(Calendar.MONTH)+1);
+        int monthInt = Integer.parseInt(month);
+        if(monthInt < 10) {
+            month = "0" + month;
+        }
         String stringCurrentDate = year + month;
         int intCurrentDate = Integer.parseInt(stringCurrentDate);
         String expYear = passedInCreditCard.getExpirationYear();
@@ -125,10 +129,17 @@ public class CreditCardRepoServiceImpl implements CreditCardService {
         Calendar calendar = new GregorianCalendar();
         String year =  Integer.toString(calendar.get(Calendar.YEAR));
         String month =  Integer.toString(calendar.get(Calendar.MONTH)+1);
+        int monthInt = Integer.parseInt(month);
+        if(monthInt < 10) {
+            month = "0" + month;
+        }
         String stringCurrentDate = year + month;
         int intCurrentDate = Integer.parseInt(stringCurrentDate);
         String expYear = passedInCreditCard.getExpirationYear();
         String expMonth = passedInCreditCard.getExpirationMonth();
+
+
+
         String stringExpireDate = expYear + expMonth;
 
         if(expYear != null && expMonth != null) {

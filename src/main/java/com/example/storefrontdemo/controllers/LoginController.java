@@ -102,7 +102,7 @@ public class LoginController {
     ) {
         session.removeAttribute("loggedInUser");
         session.removeAttribute("loggedInUserRole");
-        session.removeAttribute("loggedInUsername");
+        session.removeAttribute("F");
         session.invalidate();
         return "redirect:/";
     }

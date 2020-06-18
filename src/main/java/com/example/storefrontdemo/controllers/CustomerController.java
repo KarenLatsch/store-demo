@@ -84,7 +84,9 @@ public class CustomerController {
 
         if(passedInCustomer.getId() != null){
             Customer customer = customerService.getById(passedInCustomer.getId());
-            Customer newCustomer = customerService.saveOrUpdate(customer);
+            Customer saveCustomer = customerService.saveOrUpdate(customer);
+// SET with updated username
+            session.setAttribute("loggedInCustomerUsername", saveCustomer.getUsername());
         } else {
             Customer newCustomer = customerService.saveOrUpdate(passedInCustomer);
             //  Create a cart for new customer
@@ -97,7 +99,7 @@ public class CustomerController {
         String loggedInCustomer = (String) session.getAttribute("loggedInCustomer");
         if(loggedInCustomer != null) {
             Integer customerId = (Integer) session.getAttribute("loggedInCustomerId");
-            return "redirect:/storefront/showaccount/" + customerId;
+            return "redirect:/storefront/viewaccount/" + customerId;
         }
         return "redirect:/storefront/listproducts";
     }

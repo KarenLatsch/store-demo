@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<div class="companypageheader" th:fragment="companypageheader">
+<div class="companypageheader" th:fragment="companypageheaderLogin">
     <div class="container">
 
         <div class="row">
@@ -23,9 +23,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <h4 th:if="${session.loggedInUser != null}"><b> User Logged In</b></h4>
-            </div>
             <div class="col-md-4">
             </div>
             <div class="col-md-6">
@@ -37,10 +34,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <h4><p th:utext="(${session.loggedInUser})"></p></h4>
-            </div>
             <div class="col-md-4">
+                <div class="col-md-offset-8">
+                <a href="/">Main Menu</a>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="col-md-offset-8">
@@ -50,19 +47,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <a th:if="${session.loggedInUser != null}" href="/logout">Logout</a>
-            </div>
-        </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-offset-8">
-                <a href="/">Main Menu</a>
-            </div>
-        </div>
-    </div>
     </div>
 </div>
 </body>

@@ -73,6 +73,7 @@ public class EmployeeRepoServiceImpl implements EmployeeService {
         employee.getAddress().setCity(passedInEmployee.getAddress().getCity());
         employee.getAddress().setState(passedInEmployee.getAddress().getState());
         employee.getAddress().setZipCode(passedInEmployee.getAddress().getZipCode());
+        employee.setRoleType(passedInEmployee.getRoleType());
         employee.setUsername(passedInEmployee.getUsername());
         employee.setEnabled(passedInEmployee.getEnabled());
         String passedInPassword = passedInEmployee.getPassword();

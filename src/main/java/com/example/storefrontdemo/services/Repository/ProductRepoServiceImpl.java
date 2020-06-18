@@ -90,6 +90,9 @@ public class ProductRepoServiceImpl implements ProductService {
         product.setImageUrl(passedInProduct.getImageUrl());
         product.setOnHand(passedInProduct.getOnHand());
 
+        Integer newAvailableQty = passedInProduct.getOnHand() - product.getAllocated();
+        product.setAvailable(newAvailableQty);
+
         switch (currentProductStatus) {
             case AVAILABLE:
                 if(passedInProductStatus == ProductStatus.NEW) {
