@@ -99,3 +99,16 @@ dt {
     text-align: center;
     padding: 15px 15px 15px 15px;
 }
+.oops {
+    font-size: larger;
+    font-weight:bold;
+    font-max-size: large;
+    text-align: center;
+}
+
+.oopslink {
+    font-size: larger;
+    font-weight:bold;
+    font-max-size: large;
+    text-align: center;
+}

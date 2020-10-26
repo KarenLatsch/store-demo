@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <title>My Storefront - Error Page</title>
+</head>
+
+<body>
+<div class="container">
+    <br/>
+    <div class="row">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-offset-3">
+                            <img class="medium-image" src="/images/oops.jpg"
+                                 th:src="@{'/images/oops.jpg'}"/>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <p class="oops">Something when wrong when loading the page! </p>
+                    </div>
+                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-offset-6">
+                    <br>
+                    <a class="oopslink" href="/" >Main Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
